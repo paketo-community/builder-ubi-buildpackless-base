@@ -43,8 +43,8 @@ jobs:
         docker tag builder "gcr.io/paketo-buildpacks/builder:buildpackless-base"
         docker tag builder "gcr.io/paketo-buildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
 
-        docker push "gcr.io/paketo-buildpacks/builder:buildpackless-base"
-        docker push "gcr.io/paketo-buildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
+        docker push "gcr.io/paketo-community/builder:buildpackless-base"
+        docker push "gcr.io/paketo-community/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
 
     - name: Push to Dockerhub
       env:
