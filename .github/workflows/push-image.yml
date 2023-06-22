@@ -52,8 +52,7 @@ jobs:
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
       run: |
         echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USERNAME}" --password-stdin
-        docker tag builder "paketobuildpacks/builder:buildpackless-base"
-        docker tag builder "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
-
-        docker push "paketobuildpacks/builder:buildpackless-base"
-        docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
+        docker tag builder "paketocommunity/builder:buildpackless-base"
+        docker tag builder "paketocommunity/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
+        docker push "paketocommunity/builder:buildpackless-base"
+        docker push "paketocommunity/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
