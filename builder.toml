@@ -7,4 +7,4 @@ description = "ubi 8 base image with no buildpacks included. To use, specify bui
   build-image = "docker.io/paketocommunity/build-ubi-base:0.0.1"
   id = "io.buildpacks.stacks.ubi8"
   run-image = "index.docker.io/paketocommunity/run-ubi-base:0.0.1"
-  run-image-mirrors = ["gcr.io/paketocommunity/run-ubi-base:0.0.1"]
+  run-image-mirrors = ["gcr.io/paketo-community/run-ubi-base:0.0.1"]
