@@ -51,4 +51,3 @@ jobs:
 
         docker push "${DOCKERHUB_ORG}/${registry_repo}:latest"
         docker push "${DOCKERHUB_ORG}/${registry_repo}:${{ steps.event.outputs.tag }}"
-        
