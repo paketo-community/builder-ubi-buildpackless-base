@@ -35,24 +35,20 @@ jobs:
       run: |
         pack builder create builder --config builder.toml
 
-    - name: Push to GCR
-      env:
-        GCR_PUSH_BOT_JSON_KEY: ${{ secrets.GCR_PUSH_BOT_JSON_KEY }}
-      run: |
-        echo "${GCR_PUSH_BOT_JSON_KEY}" | docker login --username _json_key --password-stdin gcr.io
-        docker tag builder "gcr.io/paketo-buildpacks/builder:buildpackless-base"
-        docker tag builder "gcr.io/paketo-buildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
-
-        docker push "gcr.io/paketo-community/builder:buildpackless-base"
-        docker push "gcr.io/paketo-community/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
-
-    - name: Push to Dockerhub
+    - name: Push To Dockerhub
       env:
         PAKETO_BUILDPACKS_DOCKERHUB_USERNAME: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USERNAME }}
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
+        DOCKERHUB_ORG: "paketocommunity"
       run: |
+        # Strip off the Github org prefix from repo name
+        # paketo-buildpacks/builder-with-some-name --> builder-with-some-name
+        registry_repo=$(echo "${{ github.repository }}" | sed 's/^.*\///')
+
         echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USERNAME}" --password-stdin
-        docker tag builder "paketocommunity/builder:buildpackless-base"
-        docker tag builder "paketocommunity/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
-        docker push "paketocommunity/builder:buildpackless-base"
-        docker push "paketocommunity/builder:${{ steps.event.outputs.tag }}-buildpackless-base"
+        docker tag builder "${DOCKERHUB_ORG}/${registry_repo}:latest"
+        docker tag builder "${DOCKERHUB_ORG}/${registry_repo}:${{ steps.event.outputs.tag }}"
+
+        docker push "${DOCKERHUB_ORG}/${registry_repo}:latest"
+        docker push "${DOCKERHUB_ORG}/${registry_repo}:${{ steps.event.outputs.tag }}"
+        
