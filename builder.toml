@@ -1,7 +1,7 @@
 description = "ubi 8 base image with no buildpacks included. To use, specify buildpacks at build time."
 
 [lifecycle]
-  version = "0.16.4"
+  version = "0.16.5"
 
 [stack]
   build-image = "docker.io/paketocommunity/build-ubi-base:0.0.1"
