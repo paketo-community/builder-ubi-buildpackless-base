@@ -9,10 +9,10 @@ at build time using whatever mechanisms your CNB platform of choice offers.
 For example, with the `pack` CLI, use `--buildpack` as follows:
 ```
 pack build nodejs-with-buildpackless-builder \
-           --buildpack gcr.io/paketo-buildpacks/nodejs-engine \
-           --extension gcr.io/paketo-community/ubi-nodejs-extension \
-           --builder gcr.io/paketo-community/builder:ubi-buildpackless-base
-
+           --path ./app-dir \
+           --buildpack paketo-buildpacks/nodejs \
+           --extension docker.io/paketocommunity/ubi-nodejs-extension \
+           --builder paketocommunity/builder-ubi-buildpackless-base
 ```
 
 To see which versions of build and run images and the lifecycle
