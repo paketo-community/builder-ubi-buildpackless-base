@@ -1,4 +1,4 @@
-module github.com/paketo-community/builder-ubi8-buildpackless-base
+module github.com/paketo-buildpacks/builder-ubi8-buildpackless-base
 
 go 1.24.1
 
