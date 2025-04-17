@@ -1,4 +1,4 @@
-description = "ubi 8 base image with no buildpacks included. To use, specify buildpacks at build time."
+description = "ubi 8 builder with no buildpacks included. To use, specify buildpacks at build time."
 
 [lifecycle]
   version = "0.20.7"
